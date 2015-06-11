@@ -10,6 +10,10 @@
 		7D596AF41B2A03FB0063E694 /* StructBuf.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D596AF31B2A03FB0063E694 /* StructBuf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D596AFB1B2A03FB0063E694 /* StructBuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D596AF01B2A03FB0063E694 /* StructBuf.framework */; };
 		7D596B001B2A03FB0063E694 /* StructBufTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596AFF1B2A03FB0063E694 /* StructBufTests.swift */; };
+		7D596B111B2A271C0063E694 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B101B2A271C0063E694 /* main.swift */; };
+		7D596B171B2A33270063E694 /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B151B2A33270063E694 /* Varint.swift */; };
+		7D596B181B2A33270063E694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B161B2A33270063E694 /* Message.swift */; };
+		7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B191B2A33310063E694 /* VarintTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,6 +26,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7D596B0C1B2A271C0063E694 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7D596AF01B2A03FB0063E694 /* StructBuf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StructBuf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D596AF31B2A03FB0063E694 /* StructBuf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StructBuf.h; sourceTree = "<group>"; };
@@ -29,6 +45,11 @@
 		7D596AFA1B2A03FB0063E694 /* StructBufTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StructBufTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D596AFF1B2A03FB0063E694 /* StructBufTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructBufTests.swift; sourceTree = "<group>"; };
 		7D596B011B2A03FB0063E694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D596B0E1B2A271C0063E694 /* protoc-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "protoc-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D596B101B2A271C0063E694 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		7D596B151B2A33270063E694 /* Varint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varint.swift; sourceTree = "<group>"; };
+		7D596B161B2A33270063E694 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7D596B191B2A33310063E694 /* VarintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarintTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +68,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D596B0B1B2A271C0063E694 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +83,7 @@
 			children = (
 				7D596AF21B2A03FB0063E694 /* StructBuf */,
 				7D596AFE1B2A03FB0063E694 /* StructBufTests */,
+				7D596B0F1B2A271C0063E694 /* protoc-swift */,
 				7D596AF11B2A03FB0063E694 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +93,7 @@
 			children = (
 				7D596AF01B2A03FB0063E694 /* StructBuf.framework */,
 				7D596AFA1B2A03FB0063E694 /* StructBufTests.xctest */,
+				7D596B0E1B2A271C0063E694 /* protoc-swift */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +101,8 @@
 		7D596AF21B2A03FB0063E694 /* StructBuf */ = {
 			isa = PBXGroup;
 			children = (
+				7D596B151B2A33270063E694 /* Varint.swift */,
+				7D596B161B2A33270063E694 /* Message.swift */,
 				7D596AF31B2A03FB0063E694 /* StructBuf.h */,
 				7D596AF51B2A03FB0063E694 /* Info.plist */,
 			);
@@ -80,10 +112,19 @@
 		7D596AFE1B2A03FB0063E694 /* StructBufTests */ = {
 			isa = PBXGroup;
 			children = (
+				7D596B191B2A33310063E694 /* VarintTests.swift */,
 				7D596AFF1B2A03FB0063E694 /* StructBufTests.swift */,
 				7D596B011B2A03FB0063E694 /* Info.plist */,
 			);
 			path = StructBufTests;
+			sourceTree = "<group>";
+		};
+		7D596B0F1B2A271C0063E694 /* protoc-swift */ = {
+			isa = PBXGroup;
+			children = (
+				7D596B101B2A271C0063E694 /* main.swift */,
+			);
+			path = "protoc-swift";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,12 +177,30 @@
 			productReference = 7D596AFA1B2A03FB0063E694 /* StructBufTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7D596B0D1B2A271C0063E694 /* protoc-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D596B141B2A271C0063E694 /* Build configuration list for PBXNativeTarget "protoc-swift" */;
+			buildPhases = (
+				7D596B0A1B2A271C0063E694 /* Sources */,
+				7D596B0B1B2A271C0063E694 /* Frameworks */,
+				7D596B0C1B2A271C0063E694 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "protoc-swift";
+			productName = "protoc-swift";
+			productReference = 7D596B0E1B2A271C0063E694 /* protoc-swift */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		7D596AE71B2A03FB0063E694 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "David Paschich";
 				TargetAttributes = {
@@ -149,6 +208,9 @@
 						CreatedOnToolsVersion = 7.0;
 					};
 					7D596AF91B2A03FB0063E694 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					7D596B0D1B2A271C0063E694 = {
 						CreatedOnToolsVersion = 7.0;
 					};
 				};
@@ -167,6 +229,7 @@
 			targets = (
 				7D596AEF1B2A03FB0063E694 /* StructBuf */,
 				7D596AF91B2A03FB0063E694 /* StructBufTests */,
+				7D596B0D1B2A271C0063E694 /* protoc-swift */,
 			);
 		};
 /* End PBXProject section */
@@ -193,6 +256,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D596B171B2A33270063E694 /* Varint.swift in Sources */,
+				7D596B181B2A33270063E694 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +266,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D596B001B2A03FB0063E694 /* StructBufTests.swift in Sources */,
+				7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D596B0A1B2A271C0063E694 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D596B111B2A271C0063E694 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +376,7 @@
 		7D596B051B2A03FB0063E694 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,12 +389,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.theboldmole.StructBuf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		7D596B061B2A03FB0063E694 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -357,6 +434,20 @@
 			};
 			name = Release;
 		};
+		7D596B121B2A271C0063E694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7D596B131B2A271C0063E694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -376,12 +467,22 @@
 				7D596B061B2A03FB0063E694 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D596B071B2A03FB0063E694 /* Build configuration list for PBXNativeTarget "StructBufTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D596B081B2A03FB0063E694 /* Debug */,
 				7D596B091B2A03FB0063E694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D596B141B2A271C0063E694 /* Build configuration list for PBXNativeTarget "protoc-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D596B121B2A271C0063E694 /* Debug */,
+				7D596B131B2A271C0063E694 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
