@@ -149,7 +149,7 @@ extension WireValue {
     var bytes: [UInt8] {
         get {
             switch self {
-            case var .Varint(value):
+            case let .Varint(value):
                 return Varint(value).bytes
             case let .Fixed64(value):
                 return [
@@ -211,10 +211,10 @@ struct FieldSequence: SequenceType {
 }
 
 class ParseWireFormat {
-    var byteSquence: SequenceOf<UInt8>
+    var byteSquence: AnySequence<UInt8>
 
     init(bytes: [UInt8]) {
-        byteSquence = SequenceOf(bytes)
+        byteSquence = AnySequence(bytes)
     }
 
     func nextField() -> (WireValue, Int)? {
@@ -248,6 +248,10 @@ protocol Builder {
     var isValid: Bool { get }
     func addTag(tag: Int, value: WireValue)
     func build() -> M?
+}
+
+enum StructBufError {
+    case ParseFailed
 }
 
 //: Now, here's one of the example bufs from Google's documentation
@@ -360,3 +364,5 @@ let theBytes = number.bytes
 number.serializedSize
 
 let newNumber = PhoneNumber(theBytes)
+newNumber
+
