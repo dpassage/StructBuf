@@ -14,6 +14,7 @@
 		7D596B171B2A33270063E694 /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B151B2A33270063E694 /* Varint.swift */; };
 		7D596B181B2A33270063E694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B161B2A33270063E694 /* Message.swift */; };
 		7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B191B2A33310063E694 /* VarintTests.swift */; };
+		7D596B1B1B2A352B0063E694 /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B151B2A33270063E694 /* Varint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D596B111B2A271C0063E694 /* main.swift in Sources */,
+				7D596B1B1B2A352B0063E694 /* Varint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -365,7 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -386,6 +388,7 @@
 				INFOPLIST_FILE = StructBuf/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.theboldmole.StructBuf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -406,6 +409,7 @@
 				INFOPLIST_FILE = StructBuf/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.theboldmole.StructBuf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
