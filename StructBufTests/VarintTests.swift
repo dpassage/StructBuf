@@ -53,7 +53,7 @@ class VarintTests: XCTestCase {
         let number: Int = -4
         do {
             _ = try Varint(value: number)
-        } catch VarintError.NotImplemented {
+        } catch StructBufError.NotImplemented {
             return // test passes
         } catch {
             XCTFail("threw wrong error")

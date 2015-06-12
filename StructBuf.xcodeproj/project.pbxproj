@@ -15,6 +15,7 @@
 		7D596B181B2A33270063E694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B161B2A33270063E694 /* Message.swift */; };
 		7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B191B2A33310063E694 /* VarintTests.swift */; };
 		7D596B1B1B2A352B0063E694 /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B151B2A33270063E694 /* Varint.swift */; };
+		7D596B1D1B2A4FFF0063E694 /* StructBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7D596B151B2A33270063E694 /* Varint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varint.swift; sourceTree = "<group>"; };
 		7D596B161B2A33270063E694 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7D596B191B2A33310063E694 /* VarintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarintTests.swift; sourceTree = "<group>"; };
+		7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +104,11 @@
 		7D596AF21B2A03FB0063E694 /* StructBuf */ = {
 			isa = PBXGroup;
 			children = (
-				7D596B151B2A33270063E694 /* Varint.swift */,
+				7D596AF51B2A03FB0063E694 /* Info.plist */,
 				7D596B161B2A33270063E694 /* Message.swift */,
 				7D596AF31B2A03FB0063E694 /* StructBuf.h */,
-				7D596AF51B2A03FB0063E694 /* Info.plist */,
+				7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */,
+				7D596B151B2A33270063E694 /* Varint.swift */,
 			);
 			path = StructBuf;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D596B171B2A33270063E694 /* Varint.swift in Sources */,
+				7D596B1D1B2A4FFF0063E694 /* StructBuf.swift in Sources */,
 				7D596B181B2A33270063E694 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,11 +8,6 @@
 
 import Foundation
 
-public enum VarintError: ErrorType {
-    case ParseFailed
-    case NotImplemented
-}
-
 public struct Varint {
     public let bytes: [UInt8]
 
@@ -36,7 +31,7 @@ public struct Varint {
     }
 
     public init(value: Int) throws {
-        guard value >= 0 else { throw VarintError.NotImplemented }
+        guard value >= 0 else { throw StructBufError.NotImplemented }
         self.init(value: UInt64(value))
     }
 
@@ -57,14 +52,14 @@ public struct Varint {
     public static func fromBytes(bytes: [UInt8]) throws -> (Varint, Int) {
         for i in 0...10 {
             if i >= bytes.count {
-                throw VarintError.ParseFailed
+                throw StructBufError.ParseFailed
             }
             if bytes[i] & 0x80 == 0 {
                 let varint = Varint(bytes: [UInt8](bytes[0...i]))
                 return (varint, varint.bytes.count)
             }
         }
-        throw VarintError.ParseFailed
+        throw StructBufError.ParseFailed
     }
 
     public func as_bool() -> Bool {
