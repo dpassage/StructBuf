@@ -9,5 +9,8 @@
 import Foundation
 
 public protocol Message {
-
+    var bytes: [UInt8] { get }
+    var serializedSize: Int { get }
+    var unknownFields: [Int:[WireValue]] { get }
+    init?(bytes: [UInt8])
 }

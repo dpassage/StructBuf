@@ -275,9 +275,9 @@ enum PhoneType: Int {
 }
 
 struct PhoneNumber: Message {
-    let number: String!
-    let type: PhoneType?
-    let unknownFields: [Int:[WireValue]]
+    var number: String
+    var type: PhoneType
+    var unknownFields: [Int:[WireValue]]
 
     var bytes: [UInt8] {
         get {
@@ -286,10 +286,8 @@ struct PhoneNumber: Message {
             let numberBytes = [UInt8](number.utf8)
             _bytes += Varint(value: numberBytes.count).bytes
             _bytes += numberBytes
-            if let type = type {
                 _bytes += Varint(tag: 2, type: .Varint).bytes
                 _bytes += Varint(value: type.rawValue).bytes
-            }
             for (tag, values) in unknownFields {
                 for value in values {
                     _bytes += Varint(tag: tag, type: value.type).bytes
@@ -301,42 +299,20 @@ struct PhoneNumber: Message {
     }
 
     var serializedSize: Int { get { return bytes.count } }
-    init?([UInt8]) { return nil }
-    init(number: String, type: PhoneType? = .HOME, unknownFields: [Int:[WireValue]] = [:]) {
-        self.number = number
-        self.type = type
-        self.unknownFields = unknownFields
-    }
-}
 
-class PhoneNumberBuilder: Builder {
-    var number: String?
-    var type: PhoneType?
-    var unknownFields: [Int:[WireValue]] = [:]
-
-    func setNumber(number: String) -> PhoneNumberBuilder {
-        self.number = number
-        return self
-    }
-
-    func setType(type: PhoneType) -> PhoneNumberBuilder {
-        self.type = type
-        return self
-    }
-
-    func addTag(tag: Int, value: WireValue) {
+    mutating func addTag(tag: Int, value: WireValue) {
         switch tag {
         case 1:
             switch value {
             case .Bytes(let bytes):
-                number = NSString(bytes: bytes, length: bytes.count, encoding: NSUTF8StringEncoding) as? String
+                number = (NSString(bytes: bytes, length: bytes.count, encoding: NSUTF8StringEncoding) as? String)!
             default:
                 break
             }
         case 2:
             switch value {
             case .Varint(let phoneType):
-                type = PhoneType(rawValue: Int(phoneType))
+                type = PhoneType(rawValue: Int(phoneType))!
             default:
                 break
             }
@@ -349,17 +325,17 @@ class PhoneNumberBuilder: Builder {
         }
     }
 
-    func build() -> PhoneNumber? {
-        if isValid {
-            return PhoneNumber(number: number!, type: type, unknownFields: unknownFields)
-        }
-        return nil
+    init?([UInt8]) { return nil }
+    init(number: String, type: PhoneType = .HOME, unknownFields: [Int:[WireValue]] = [:]) {
+        self.number = number
+        self.type = type
+        self.unknownFields = unknownFields
     }
-
-    var isValid: Bool { get { return number != nil } }
 }
 
-let number: PhoneNumber = PhoneNumberBuilder().setNumber("Foo").setType(.HOME).build()!
+
+//let number: PhoneNumber = PhoneNumberBuilder().setNumber("Foo").setType(.HOME).build()!
+let number = PhoneNumber(number: "Foo", type: .HOME)
 let theBytes = number.bytes
 number.serializedSize
 

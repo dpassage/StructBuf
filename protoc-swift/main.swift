@@ -16,5 +16,5 @@ print("Hello, World!")
 // In particular, command line is:
 // plugin [[]--out=OUTDIR] [[]--parameter=PARAMETER] PROTO_FILES < DESCRIPTORS
 
-let varint = Varint(value: true)
-print(varint)
+// open stdin as nsinputstream
+// pass it to the FileDescriptorSet proto

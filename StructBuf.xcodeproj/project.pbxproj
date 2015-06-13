@@ -16,6 +16,10 @@
 		7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B191B2A33310063E694 /* VarintTests.swift */; };
 		7D596B1B1B2A352B0063E694 /* Varint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B151B2A33270063E694 /* Varint.swift */; };
 		7D596B1D1B2A4FFF0063E694 /* StructBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */; };
+		7D596B221B2B37BB0063E694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B161B2A33270063E694 /* Message.swift */; };
+		7D596B231B2B38120063E694 /* StructBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */; };
+		7D596B251B2B54650063E694 /* Frame.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B241B2B54650063E694 /* Frame.pb.swift */; };
+		7D70C8291B2B844F006173F1 /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D70C8281B2B844F006173F1 /* MessageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,8 @@
 		7D596B161B2A33270063E694 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7D596B191B2A33310063E694 /* VarintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarintTests.swift; sourceTree = "<group>"; };
 		7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuf.swift; sourceTree = "<group>"; };
+		7D596B241B2B54650063E694 /* Frame.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.pb.swift; sourceTree = "<group>"; };
+		7D70C8281B2B844F006173F1 /* MessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,7 @@
 				7D596B191B2A33310063E694 /* VarintTests.swift */,
 				7D596AFF1B2A03FB0063E694 /* StructBufTests.swift */,
 				7D596B011B2A03FB0063E694 /* Info.plist */,
+				7D70C8281B2B844F006173F1 /* MessageTests.swift */,
 			);
 			path = StructBufTests;
 			sourceTree = "<group>";
@@ -126,9 +133,18 @@
 		7D596B0F1B2A271C0063E694 /* protoc-swift */ = {
 			isa = PBXGroup;
 			children = (
+				7D596B1E1B2B37380063E694 /* protos */,
 				7D596B101B2A271C0063E694 /* main.swift */,
 			);
 			path = "protoc-swift";
+			sourceTree = "<group>";
+		};
+		7D596B1E1B2B37380063E694 /* protos */ = {
+			isa = PBXGroup;
+			children = (
+				7D596B241B2B54650063E694 /* Frame.pb.swift */,
+			);
+			name = protos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D596B001B2A03FB0063E694 /* StructBufTests.swift in Sources */,
+				7D70C8291B2B844F006173F1 /* MessageTests.swift in Sources */,
 				7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,7 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D596B231B2B38120063E694 /* StructBuf.swift in Sources */,
+				7D596B251B2B54650063E694 /* Frame.pb.swift in Sources */,
 				7D596B111B2A271C0063E694 /* main.swift in Sources */,
+				7D596B221B2B37BB0063E694 /* Message.swift in Sources */,
 				7D596B1B1B2A352B0063E694 /* Varint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,6 +513,7 @@
 				7D596B131B2A271C0063E694 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
