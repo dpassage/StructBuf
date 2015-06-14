@@ -268,11 +268,48 @@ optional PhoneType type = 2 [default = HOME];
 }
 */
 
-enum PhoneType: Int {
-    case MOBILE = 0
-    case HOME = 1
-    case WORK = 2
+enum PhoneType {
+    case Mobile
+    case Home
+    case Work
+    case Unknown(Int)
+
+    var rawValue: Int {
+         switch self {
+        case .Mobile:
+            return 0
+        case .Home:
+            return 1
+        case .Work:
+            return 2
+        case let .Unknown(value):
+            return value
+        }
+    }
+    init(rawValue: Int) {
+        switch rawValue {
+        case 0:
+            self = .Mobile
+        case 1:
+            self = .Home
+        case 2:
+            self = .Work
+        default:
+            self = .Unknown(rawValue)
+        }
+    }
+
+    var bytes: [UInt8] {
+        return Varint(value: 1).bytes + Varint(value: rawValue).bytes
+    }
 }
+
+var foo: PhoneType = .Unknown(4)
+print(foo.rawValue)
+
+//var bar = PhoneType(rawValue: 32)
+//bar?.hashValue
+
 
 struct PhoneNumber: Message {
     var number: String
@@ -312,7 +349,7 @@ struct PhoneNumber: Message {
         case 2:
             switch value {
             case .Varint(let phoneType):
-                type = PhoneType(rawValue: Int(phoneType))!
+                type = PhoneType(rawValue: Int(phoneType))
             default:
                 break
             }
@@ -326,7 +363,7 @@ struct PhoneNumber: Message {
     }
 
     init?([UInt8]) { return nil }
-    init(number: String, type: PhoneType = .HOME, unknownFields: [Int:[WireValue]] = [:]) {
+    init(number: String, type: PhoneType = .Home, unknownFields: [Int:[WireValue]] = [:]) {
         self.number = number
         self.type = type
         self.unknownFields = unknownFields
@@ -335,7 +372,7 @@ struct PhoneNumber: Message {
 
 
 //let number: PhoneNumber = PhoneNumberBuilder().setNumber("Foo").setType(.HOME).build()!
-let number = PhoneNumber(number: "Foo", type: .HOME)
+let number = PhoneNumber(number: "Foo", type: .Home)
 let theBytes = number.bytes
 number.serializedSize
 

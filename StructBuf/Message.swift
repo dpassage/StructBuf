@@ -14,3 +14,11 @@ public protocol Message {
     var unknownFields: [Int:[WireValue]] { get }
     init?(bytes: [UInt8])
 }
+
+extension Message {
+    var serializedSize: Int { return bytes.count }
+
+    var bytes: [UInt8] { return [] }
+    var unknownFields: [Int:[WireValue]] { return [:] }
+    init?(bytes: [UInt8]) { return nil }
+}

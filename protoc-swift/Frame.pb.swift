@@ -10,13 +10,12 @@ import Foundation
 
 struct Frame: Message {
 
-    let size: UInt32
+    var size: UInt32
 
-    struct FrameBuilder: Builder {
-        static func fromStream(stream: NSInputStream) throws -> Message {
-            throw StructBufError.NotImplemented
-        }
+    var bytes: [UInt8]
+    var serializedSize: Int
+    var unknownFields: [Int:[WireValue]]
+    init?(bytes: [UInt8]) {
+        return nil
     }
-
-
 }

@@ -49,3 +49,43 @@ public enum WireValue {
         }
     }
 }
+
+//: Because Swift `enum`s can have methods, we have a convenient place to
+//: put serialization code.
+extension WireValue {
+    var bytes: [UInt8] {
+        get {
+            switch self {
+            case let .Varint(value):
+                return Varint(value).bytes
+            case let .Fixed64(value):
+                return [
+                    UInt8( value        & 0xFF),
+                    UInt8((value >>  8) & 0xFF),
+                    UInt8((value >> 16) & 0xFF),
+                    UInt8((value >> 24) & 0xFF),
+                    UInt8((value >> 32) & 0xFF),
+                    UInt8((value >> 40) & 0xFF),
+                    UInt8((value >> 48) & 0xFF),
+                    UInt8((value >> 56) & 0xFF)
+                ]
+            case let .Bytes(value):
+                return Varint(UInt64(value.count)).bytes + value
+            case .StartGroup:
+                fallthrough
+            case .EndGroup:
+                return []
+            case let .Fixed32(value):
+                return [
+                    UInt8( value        & 0xFF),
+                    UInt8((value >>  8) & 0xFF),
+                    UInt8((value >> 16) & 0xFF),
+                    UInt8((value >> 24) & 0xFF)
+                ]
+            }
+        }
+    }
+    var byteCount: Int {
+        get { return bytes.count }
+    }
+}

@@ -35,9 +35,9 @@ public struct Varint {
         self.init(value: UInt64(value))
     }
 
-//    init(tag: Int, type: WireType) {
-//        self.init(value: UInt64(tag) << 3 | UInt64(type.rawValue))
-//    }
+    init(tag: Int, type: WireType) {
+        self.init(value: UInt64(tag) << 3 | UInt64(type.rawValue))
+    }
 
     public init(bytes: [UInt8]) {
         self.bytes = bytes
