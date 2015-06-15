@@ -70,4 +70,12 @@ public struct Varint {
             return (bytes[0] & 0xFF) != 0
         }
     }
+
+    public func asInt() throws -> Int {
+        var accum: UInt64 = 0
+        for byte in bytes {
+            accum = (accum << 8) | UInt64(byte)
+        }
+        throw StructBufError.NotImplemented
+    }
 }

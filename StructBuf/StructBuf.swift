@@ -89,3 +89,37 @@ extension WireValue {
         get { return bytes.count }
     }
 }
+
+extension WireValue: Equatable {}
+public func ==(left: WireValue, right: WireValue) -> Bool {
+    switch left {
+    case let .Varint(value):
+        return right == WireValue.Varint(value)
+    case let .Fixed64(value):
+        return right == WireValue.Fixed64(value)
+    case let .Bytes(value):
+        return right == WireValue.Bytes(value)
+    case .StartGroup:
+        return right == .StartGroup
+    case .EndGroup:
+        return right == .EndGroup
+    case let .Fixed32(value):
+        return right == .Fixed32(value)
+    }
+}
+
+public struct Field {
+    var number: Int
+    var value: WireValue
+
+    var bytes: [UInt8] {
+        return Varint(tag: number, type: value.type).bytes +
+        value.bytes
+    }
+
+    static func fromBytes(bytes: [UInt8]) throws -> (Field, Int) {
+        throw StructBufError.NotImplemented
+//        let (varint, bytesRead) = try Varint.fromBytes(bytes)
+//        let number = varint.
+    }
+}

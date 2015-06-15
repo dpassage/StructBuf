@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import StructBuf
 
 class StructBufTests: XCTestCase {
     
@@ -20,16 +21,19 @@ class StructBufTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+}
+
+class FieldTests: XCTestCase {
+
+    func testFixed32Field() {
+        let bytes: [UInt8] = [0x0d, 0x00, 0x00, 0x00, 0x00]
+        do {
+            let (field, bytes_read) = try Field.fromBytes(bytes)
+            XCTAssertEqual(bytes_read, 5)
+            XCTAssertEqual(field.number, 1)
+            XCTAssert(field.value == WireValue.Fixed32(0))
+        } catch {
+            XCTFail("should not have thrown \(error)")
         }
     }
-    
 }

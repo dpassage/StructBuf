@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "17F39CD575C36F7F34694B6692A09DDD1517C843",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "17F39CD575C36F7F34694B6692A09DDD1517C843" : 0,
+    "DBA6F8B12B84878540F44342C4772AC004D85ABD" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0D089CFF-5191-4131-9563-BBE955A43ACE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "17F39CD575C36F7F34694B6692A09DDD1517C843" : "StructBuf\/",
+    "DBA6F8B12B84878540F44342C4772AC004D85ABD" : "StructBuf\/protobuf\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "StructBuf",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "StructBuf.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dpassage\/StructBuf.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "17F39CD575C36F7F34694B6692A09DDD1517C843"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/google\/protobuf",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DBA6F8B12B84878540F44342C4772AC004D85ABD"
+    }
+  ]
+}

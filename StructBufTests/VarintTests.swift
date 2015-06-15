@@ -107,4 +107,9 @@ class VarintTests: XCTestCase {
         let varint = Varint(bytes: [])
         XCTAssertFalse(varint.as_bool())
     }
+
+    func testAsInt() {
+        let varint = try! Varint(value: 4)
+        XCTAssertEqual(4, varint.asInt())
+    }
 }
