@@ -9,20 +9,6 @@
 import XCTest
 @testable import StructBuf
 
-class StructBufTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-}
-
 class FieldTests: XCTestCase {
 
     func testFixed32Field() {
@@ -35,5 +21,96 @@ class FieldTests: XCTestCase {
         } catch {
             XCTFail("should not have thrown \(error)")
         }
+    }
+}
+
+class WireValueTests: XCTestCase {
+
+    func testTypeForVarint() {
+        let value = WireValue.Varint(12)
+        XCTAssertEqual(value.type, WireType.Varint)
+    }
+
+    func testTypeForFixed64() {
+        let value = WireValue.Fixed64(1)
+        XCTAssertEqual(value.type, WireType.Fixed64)
+    }
+
+    func testTypeForBytes() {
+        let value = WireValue.Bytes([])
+        XCTAssertEqual(value.type, WireType.Bytes)
+    }
+
+    func testTypeForStartGroup() {
+        let value = WireValue.StartGroup
+        XCTAssertEqual(value.type, WireType.StartGroup)
+    }
+
+    func testTypeForEndGroup() {
+        let value = WireValue.EndGroup
+        XCTAssertEqual(value.type, WireType.EndGroup)
+    }
+
+    func testTypeForFixed32() {
+        let value = WireValue.Fixed32(1)
+        XCTAssertEqual(value.type, WireType.Fixed32)
+    }
+}
+
+class WireValueBytesTests: XCTestCase {
+    func testVarint() {
+        let value = WireValue.Varint(1)
+        let bytes = value.bytes
+        XCTAssertEqual(bytes, [1])
+    }
+
+    func testFixed64() {
+        let value = WireValue.Fixed64(1)
+        let bytes = value.bytes
+        XCTAssertEqual(bytes, [1, 0, 0, 0, 0, 0, 0, 0])
+    }
+
+    func testBytes() {
+        let value = WireValue.Bytes([1, 2, 3, 4, 5])
+        let bytes = value.bytes
+        XCTAssertEqual(bytes, [5, 1, 2, 3, 4, 5])
+    }
+
+    func testStartGroup() {
+        let value = WireValue.StartGroup
+        XCTAssertEqual(value.bytes, [])
+    }
+
+    func testEndGroup() {
+        let value = WireValue.EndGroup
+        XCTAssertEqual(value.bytes, [])
+    }
+
+    func testFixed32() {
+        let value = WireValue.Fixed32(UInt32.max)
+        XCTAssertEqual(value.bytes, [0xFF, 0xFF, 0xFF, 0xFF])
+    }
+}
+class WireValueEquatableTests: XCTestCase {
+
+    func testVarintEqualWithSameValue() {
+        let left = WireValue.Varint(UInt64(UInt32.max))
+        let right = WireValue.Varint(UInt64(UInt32.max))
+
+        XCTAssert(left == right)
+    }
+
+    func testFixed32EqualWithSameValue() {
+        let left = WireValue.Fixed32(4)
+        let right = WireValue.Fixed32(4)
+
+        XCTAssert(left == right)
+    }
+
+    func testFixed32NotEqualWithDifferentValue() {
+        let left = WireValue.Fixed32(0)
+        let right = WireValue.Fixed32(87)
+
+        XCTAssert(left != right)
     }
 }

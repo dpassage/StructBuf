@@ -11,6 +11,7 @@ import Foundation
 public enum StructBufError: ErrorType {
     case ParseFailed
     case NotImplemented
+    case OutOfRange
 }
 
 public enum WireType: Int {
@@ -57,7 +58,8 @@ extension WireValue {
         get {
             switch self {
             case let .Varint(value):
-                return Varint(value).bytes
+                let varint = StructBuf.Varint(value: value)
+                return varint.bytes
             case let .Fixed64(value):
                 return [
                     UInt8( value        & 0xFF),
@@ -85,26 +87,25 @@ extension WireValue {
             }
         }
     }
-    var byteCount: Int {
-        get { return bytes.count }
-    }
 }
 
 extension WireValue: Equatable {}
 public func ==(left: WireValue, right: WireValue) -> Bool {
-    switch left {
-    case let .Varint(value):
-        return right == WireValue.Varint(value)
-    case let .Fixed64(value):
-        return right == WireValue.Fixed64(value)
-    case let .Bytes(value):
-        return right == WireValue.Bytes(value)
-    case .StartGroup:
-        return right == .StartGroup
-    case .EndGroup:
-        return right == .EndGroup
-    case let .Fixed32(value):
-        return right == .Fixed32(value)
+    switch (left, right) {
+    case (.Varint(let leftvalue), .Varint(let rightvalue)) where leftvalue == rightvalue:
+        return true
+//    case let .Fixed64(value):
+//        return right == WireValue.Fixed64(value)
+//    case let .Bytes(value):
+//        return right == WireValue.Bytes(value)
+//    case .StartGroup:
+//        return right == .StartGroup
+//    case .EndGroup:
+//        return right == .EndGroup
+    case (.Fixed32(let leftvalue), .Fixed32(let rightvalue)) where leftvalue == rightvalue:
+        return true
+    default:
+        return false
     }
 }
 
@@ -118,8 +119,28 @@ public struct Field {
     }
 
     static func fromBytes(bytes: [UInt8]) throws -> (Field, Int) {
-        throw StructBufError.NotImplemented
-//        let (varint, bytesRead) = try Varint.fromBytes(bytes)
-//        let number = varint.
+        var totalBytesRead = 0
+        let (varint, bytesRead) = try Varint.fromBytes(bytes)
+        totalBytesRead += bytesRead
+        let number = try varint.asInt()
+        let tag = number >> 3
+        guard let type = WireType(rawValue: number & 0x7) else { throw StructBufError.ParseFailed }
+
+        switch type {
+        case .Varint:
+            let valueBytes = [UInt8](bytes[totalBytesRead..<bytes.count])
+            let (varintValue, varintBytes) = try Varint.fromBytes(valueBytes)
+            totalBytesRead += varintBytes
+            return (Field(number: tag, value: WireValue.Varint(varintValue.asUInt64())), totalBytesRead)
+        case .Fixed32:
+            var value: UInt32 = 0
+            guard bytes.count >= totalBytesRead + 4 else { throw StructBufError.ParseFailed }
+            for i in totalBytesRead..<(totalBytesRead + 4) {
+                value = (value << 8) + UInt32(bytes[i])
+            }
+            return (Field(number: tag, value: WireValue.Fixed32(value)), totalBytesRead + 4)
+        default:
+            throw StructBufError.NotImplemented
+        }
     }
 }

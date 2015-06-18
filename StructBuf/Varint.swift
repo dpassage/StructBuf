@@ -72,10 +72,18 @@ public struct Varint {
     }
 
     public func asInt() throws -> Int {
+        let value = asUInt64()
+        if (value > UInt64(Int.max)) {
+            throw StructBufError.OutOfRange
+        }
+        return Int(value)
+    }
+
+    public func asUInt64() -> UInt64 {
         var accum: UInt64 = 0
         for byte in bytes {
             accum = (accum << 8) | UInt64(byte)
         }
-        throw StructBufError.NotImplemented
+        return accum
     }
 }
