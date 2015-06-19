@@ -15,10 +15,6 @@ public protocol Message {
     init?(bytes: [UInt8])
 }
 
-extension Message {
+public extension Message {
     var serializedSize: Int { return bytes.count }
-
-    var bytes: [UInt8] { return [] }
-    var unknownFields: [Int:[WireValue]] { return [:] }
-    init?(bytes: [UInt8]) { return nil }
 }
