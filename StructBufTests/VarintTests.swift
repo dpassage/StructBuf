@@ -110,6 +110,7 @@ class VarintTests: XCTestCase {
 
     func testAsInt() {
         let varint = try! Varint(value: 4)
-        XCTAssertEqual(4, varint.asInt())
+        let value = varint.asInt()
+        XCTAssertEqual(4, value)
     }
 }

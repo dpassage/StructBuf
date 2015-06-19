@@ -92,19 +92,11 @@ extension WireValue {
 
 extension WireValue: Equatable {}
 public func ==(left: WireValue, right: WireValue) -> Bool {
-    switch left {
-    case let .Varint(value):
-        return right == WireValue.Varint(value)
-    case let .Fixed64(value):
-        return right == WireValue.Fixed64(value)
-    case let .Bytes(value):
-        return right == WireValue.Bytes(value)
-    case .StartGroup:
-        return right == .StartGroup
-    case .EndGroup:
-        return right == .EndGroup
-    case let .Fixed32(value):
-        return right == .Fixed32(value)
+    switch (left, right) {
+    case (.Fixed32(let leftValue), .Fixed32(let rightValue)):
+        return leftValue == rightValue
+    default:
+        return false
     }
 }
 
@@ -118,8 +110,22 @@ public struct Field {
     }
 
     static func fromBytes(bytes: [UInt8]) throws -> (Field, Int) {
-        throw StructBufError.NotImplemented
-//        let (varint, bytesRead) = try Varint.fromBytes(bytes)
-//        let number = varint.
+        let (varint, bytesRead) = try Varint.fromBytes(bytes)
+        let key = varint.asInt()
+        let number = key >> 3
+        guard let type = WireType(rawValue: key & 7)
+            else { throw StructBufError.ParseFailed }
+        switch type {
+        case .Fixed32:
+            var accum: UInt32 = 0
+            if bytes.count < bytesRead + 4 { throw StructBufError.ParseFailed }
+            for i in bytesRead..<(bytesRead + 4) {
+                accum = (accum << 8) + UInt32(bytes[i])
+            }
+            let field = Field(number: number, value: .Fixed32(accum))
+            return (field, bytesRead + 4)
+        default:
+            throw StructBufError.NotImplemented
+        }
     }
 }

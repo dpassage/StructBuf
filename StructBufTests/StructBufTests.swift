@@ -23,6 +23,14 @@ class StructBufTests: XCTestCase {
     
 }
 
+class WireValueEquatableTests: XCTestCase {
+    func testFixed32() {
+        let left = WireValue.Fixed32(2)
+        let right = WireValue.Fixed32(2)
+        XCTAssert(left == right)
+    }
+}
+
 class FieldTests: XCTestCase {
 
     func testFixed32Field() {
