@@ -17,4 +17,9 @@ print("Hello, World!")
 // plugin [[]--out=OUTDIR] [[]--parameter=PARAMETER] PROTO_FILES < DESCRIPTORS
 
 // open stdin as nsinputstream
+
 // pass it to the FileDescriptorSet proto
+let handle = NSFileHandle.fileHandleWithStandardInput()
+let inputData = handle.availableData
+print(inputData.length)
+exit(1)

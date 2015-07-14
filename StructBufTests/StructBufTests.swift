@@ -41,7 +41,7 @@ class FieldTests: XCTestCase {
 class WireValueTests: XCTestCase {
 
     func testTypeForVarint() {
-        let value = WireValue.Varint(12)
+        let value = WireValue.VarintEncoded(12)
         XCTAssertEqual(value.type, WireType.Varint)
     }
 
@@ -73,7 +73,7 @@ class WireValueTests: XCTestCase {
 
 class WireValueBytesTests: XCTestCase {
     func testVarint() {
-        let value = WireValue.Varint(1)
+        let value = WireValue.VarintEncoded(1)
         let bytes = value.bytes
         XCTAssertEqual(bytes, [1])
     }
@@ -108,8 +108,8 @@ class WireValueBytesTests: XCTestCase {
 class WireValueEquatableTests: XCTestCase {
 
     func testVarintEqualWithSameValue() {
-        let left = WireValue.Varint(UInt64(UInt32.max))
-        let right = WireValue.Varint(UInt64(UInt32.max))
+        let left = WireValue.VarintEncoded(UInt64(UInt32.max))
+        let right = WireValue.VarintEncoded(UInt64(UInt32.max))
 
         XCTAssert(left == right)
     }

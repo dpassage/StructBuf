@@ -10,6 +10,7 @@ import Foundation
 
 struct FileDescriptorSet: Message {
     var file: [FileDescriptorProto] = []
+    var unknownFields: [Int:[WireValue]] = [:]
 
     var bytes: [UInt8] {
         get {
@@ -21,6 +22,10 @@ struct FileDescriptorSet: Message {
             }
             return _bytes
         }
+    }
+
+    init?(bytes: [UInt8]) {
+        return nil
     }
 }
 
@@ -42,6 +47,12 @@ struct FileDescriptorProto: Message {
     var options: FileOptions? = nil
 
     var sourceCodeInfo: SourceCodeInfo? = nil
+
+    var bytes: [UInt8] { get { return [] } }
+    var unknownFields: [Int:[WireValue]] = [:]
+    init?(bytes: [UInt8]) {
+        return nil
+    }
 }
 
 struct DescriptorProto {

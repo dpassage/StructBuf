@@ -24,7 +24,7 @@ public enum WireType: Int {
 }
 
 public enum WireValue {
-    case Varint(UInt64)
+    case VarintEncoded(UInt64)
     case Fixed64(UInt64)
     case Bytes([UInt8])
     case StartGroup
@@ -34,7 +34,7 @@ public enum WireValue {
     public var type: WireType {
         get {
             switch self {
-            case .Varint(_):
+            case .VarintEncoded(_):
                 return WireType.Varint
             case .Fixed64(_):
                 return WireType.Fixed64
@@ -57,8 +57,8 @@ extension WireValue {
     var bytes: [UInt8] {
         get {
             switch self {
-            case let .Varint(value):
-                let varint = StructBuf.Varint(value: value)
+            case let .VarintEncoded(value):
+                let varint = Varint(value :value)
                 return varint.bytes
             case let .Fixed64(value):
                 return [
@@ -72,7 +72,7 @@ extension WireValue {
                     UInt8((value >> 56) & 0xFF)
                 ]
             case let .Bytes(value):
-                return Varint(UInt64(value.count)).bytes + value
+                return Varint(value: UInt64(value.count)).bytes + value
             case .StartGroup:
                 fallthrough
             case .EndGroup:
@@ -94,8 +94,8 @@ public func ==(left: WireValue, right: WireValue) -> Bool {
     switch (left, right) {
     case (.Fixed32(let leftValue), .Fixed32(let rightValue)):
         return leftValue == rightValue
-    case (.Varint(let leftvalue), .Varint(let rightvalue)):
-    return leftvalue == rightvalue
+    case (.VarintEncoded(let leftvalue), .VarintEncoded(let rightvalue)):
+        return leftvalue == rightvalue
 //    case let .Fixed64(value):
 //        return right == WireValue.Fixed64(value)
 //    case let .Bytes(value):
@@ -131,7 +131,7 @@ public struct Field {
             let valueBytes = [UInt8](bytes[totalBytesRead..<bytes.count])
             let (varintValue, varintBytes) = try Varint.fromBytes(valueBytes)
             totalBytesRead += varintBytes
-            return (Field(number: tag, value: WireValue.Varint(varintValue.asUInt64())), totalBytesRead)
+            return (Field(number: tag, value: WireValue.VarintEncoded(varintValue.asUInt64())), totalBytesRead)
         case .Fixed32:
             var value: UInt32 = 0
             guard bytes.count >= totalBytesRead + 4 else { throw StructBufError.ParseFailed }
