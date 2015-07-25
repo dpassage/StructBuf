@@ -104,6 +104,17 @@ class VarintTests: XCTestCase {
         XCTFail("parse should have vailed")
     }
 
+    func testNotEnoughBytes() {
+        do {
+            _ = try Varint.fromBytes([])
+        } catch StructBufError.ParseFailed {
+            return
+        } catch {
+            XCTFail("threw wrong error")
+        }
+        XCTFail("should have thrown error")
+    }
+
     func testAsBool() {
         do {
             let varint = try Varint(value: 40)
@@ -113,10 +124,6 @@ class VarintTests: XCTestCase {
         }
     }
 
-    func testAsBoolNoBytes() {
-        let varint = Varint(bytes: [])
-        XCTAssertFalse(varint.as_bool())
-    }
 
     func testAsInt() {
         let varint = try! Varint(value: 4)

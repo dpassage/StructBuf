@@ -39,7 +39,7 @@ public struct Varint {
         self.init(uint64: UInt64(tag) << 3 | UInt64(type.rawValue))
     }
 
-    public init(bytes: [UInt8]) {
+    private init(bytes: [UInt8]) {
         self.bytes = bytes
     }
 
