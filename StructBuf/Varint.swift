@@ -81,8 +81,8 @@ public struct Varint {
 
     public func asUInt64() -> UInt64 {
         var accum: UInt64 = 0
-        for byte in bytes {
-            accum = (accum << 8) | UInt64(byte)
+        for b in bytes.reverse() {
+            accum = UInt64(b & 0x7f) + (accum << 7)
         }
         return accum
     }

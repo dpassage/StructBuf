@@ -36,6 +36,49 @@ class FieldTests: XCTestCase {
             XCTFail("should not have thrown \(error)")
         }
     }
+
+    func testFixed32FieldNotLongEnough() {
+        let bytes: [UInt8] = [0xd]
+        do {
+            let (_, _) = try Field.fromBytes(bytes)
+        } catch {
+            // test passed!
+            return
+        }
+        XCTFail("should have thrown")
+    }
+
+    func testVarint() {
+        let bytes: [UInt8] = [0x08, 0x96, 0x01]
+        do {
+            let (field, bytes_read) = try Field.fromBytes(bytes)
+            XCTAssertEqual(bytes_read, 3)
+            XCTAssertEqual(field.number, 1)
+            XCTAssert(field.value == WireValue.VarintEncoded(150))
+        } catch {
+            XCTFail("should not have thrown")
+        }
+    }
+
+    func testFieldToBytes() {
+        let field = Field(number: 1, value: WireValue.Fixed64(0))
+        let bytes = field.bytes
+        XCTAssertEqual(bytes.count, 9)
+    }
+
+    func testFromBytesShouldThrowIfTypeIs6() {
+        let bytes: [UInt8] = [6]
+        do {
+            let (_, _) = try Field.fromBytes(bytes)
+        } catch StructBufError.ParseFailed {
+            //test passed
+            return
+        } catch {
+            XCTFail("wrong error thrown")
+            return
+        }
+        XCTFail("should have thrown")
+    }
 }
 
 class WireValueTests: XCTestCase {
@@ -43,6 +86,13 @@ class WireValueTests: XCTestCase {
     func testTypeForVarint() {
         let value = WireValue.VarintEncoded(12)
         XCTAssertEqual(value.type, WireType.Varint)
+    }
+
+    func testVarintFromNumericValue() {
+        let varint = try! Varint(value: 150)
+        XCTAssertEqual(varint.bytes.count, 2)
+        XCTAssertEqual(varint.bytes, [0x96, 0x01])
+        XCTAssertEqual(varint.asUInt64(), UInt64(150))
     }
 
     func testTypeForFixed64() {
