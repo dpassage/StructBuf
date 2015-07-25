@@ -58,7 +58,7 @@ extension WireValue {
         get {
             switch self {
             case let .VarintEncoded(value):
-                let varint = Varint(value :value)
+                let varint = Varint(uint64 :value)
                 return varint.bytes
             case let .Fixed64(value):
                 return [
@@ -72,7 +72,9 @@ extension WireValue {
                     UInt8((value >> 56) & 0xFF)
                 ]
             case let .Bytes(value):
-                return Varint(value: UInt64(value.count)).bytes + value
+                var bytes = Varint(uint64: UInt64(value.count)).bytes
+                bytes.extend(value)
+                return bytes
             case .StartGroup:
                 fallthrough
             case .EndGroup:

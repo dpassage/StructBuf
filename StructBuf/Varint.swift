@@ -11,9 +11,9 @@ import Foundation
 public struct Varint {
     public let bytes: [UInt8]
 
-    public init(value: UInt64) {
+    public init(uint64: UInt64) {
         var _bytes: [UInt8] = []
-        var _value = value
+        var _value = uint64
         while (true) {
             if ((_value & ~0x7F) == 0) {
                 _bytes.append(UInt8(_value))
@@ -26,17 +26,17 @@ public struct Varint {
         bytes = _bytes
     }
 
-    public init(value: UInt32) {
-        self.init(value: UInt64(value))
+    public init(uint32: UInt32) {
+        self.init(uint64: UInt64(uint32))
     }
 
     public init(value: Int) throws {
         guard value >= 0 else { throw StructBufError.NotImplemented }
-        self.init(value: UInt64(value))
+        self.init(uint64: UInt64(value))
     }
 
     init(tag: Int, type: WireType) {
-        self.init(value: UInt64(tag) << 3 | UInt64(type.rawValue))
+        self.init(uint64: UInt64(tag) << 3 | UInt64(type.rawValue))
     }
 
     public init(bytes: [UInt8]) {
