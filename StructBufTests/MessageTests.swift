@@ -12,13 +12,13 @@ import StructBuf
 struct TestMessage: Message {
     var bytes: [UInt8]
     var unknownFields:[Int:[WireValue]] { return [:] }
-    init?(bytes: [UInt8]) { self.bytes = bytes }
+    init<S: SequenceType where S.Generator.Element == UInt8>(bytes: S) throws { self.bytes = [UInt8](bytes) }
 }
 
 class MessageTests: XCTestCase {
 
     func testSizeIsCorrect() {
-        let message = TestMessage(bytes: [0,1,2])!
+        let message = try! TestMessage(bytes: [0,1,2])
         XCTAssertEqual(message.serializedSize, 3)
     }
 }

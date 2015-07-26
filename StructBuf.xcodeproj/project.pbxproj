@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B8F26D71B647D40005032CE /* FrameTests.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8F26D61B647D40005032CE /* FrameTests.pb.swift */; };
+		6B8F26D81B647E6E005032CE /* Frame.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B241B2B54650063E694 /* Frame.pb.swift */; };
 		6BC3A5CC1B2BFA29007E988A /* Descriptor.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3A5CB1B2BFA29007E988A /* Descriptor.pb.swift */; };
 		7D596AF41B2A03FB0063E694 /* StructBuf.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D596AF31B2A03FB0063E694 /* StructBuf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D596AFB1B2A03FB0063E694 /* StructBuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D596AF01B2A03FB0063E694 /* StructBuf.framework */; };
@@ -19,7 +21,6 @@
 		7D596B1D1B2A4FFF0063E694 /* StructBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */; };
 		7D596B221B2B37BB0063E694 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B161B2A33270063E694 /* Message.swift */; };
 		7D596B231B2B38120063E694 /* StructBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */; };
-		7D596B251B2B54650063E694 /* Frame.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D596B241B2B54650063E694 /* Frame.pb.swift */; };
 		7D70C8291B2B844F006173F1 /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D70C8281B2B844F006173F1 /* MessageTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B8F26D61B647D40005032CE /* FrameTests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameTests.pb.swift; sourceTree = "<group>"; };
 		6BC3A5CA1B2BF9E4007E988A /* descriptor.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = descriptor.proto; path = protobuf/src/google/protobuf/descriptor.proto; sourceTree = SOURCE_ROOT; };
 		6BC3A5CB1B2BFA29007E988A /* Descriptor.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Descriptor.pb.swift; sourceTree = "<group>"; };
 		7D596AF01B2A03FB0063E694 /* StructBuf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StructBuf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +62,7 @@
 		7D596B161B2A33270063E694 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7D596B191B2A33310063E694 /* VarintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarintTests.swift; sourceTree = "<group>"; };
 		7D596B1C1B2A4FFF0063E694 /* StructBuf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructBuf.swift; sourceTree = "<group>"; };
-		7D596B241B2B54650063E694 /* Frame.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.pb.swift; sourceTree = "<group>"; };
+		7D596B241B2B54650063E694 /* Frame.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Frame.pb.swift; path = "../protoc-swift/Frame.pb.swift"; sourceTree = "<group>"; };
 		7D70C8281B2B844F006173F1 /* MessageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B8F26D51B647D14005032CE /* protos */ = {
+			isa = PBXGroup;
+			children = (
+				7D596B241B2B54650063E694 /* Frame.pb.swift */,
+			);
+			name = protos;
+			sourceTree = "<group>";
+		};
 		7D596AE61B2A03FB0063E694 = {
 			isa = PBXGroup;
 			children = (
@@ -125,10 +135,12 @@
 		7D596AFE1B2A03FB0063E694 /* StructBufTests */ = {
 			isa = PBXGroup;
 			children = (
+				6B8F26D51B647D14005032CE /* protos */,
 				7D596B191B2A33310063E694 /* VarintTests.swift */,
 				7D596AFF1B2A03FB0063E694 /* StructBufTests.swift */,
 				7D596B011B2A03FB0063E694 /* Info.plist */,
 				7D70C8281B2B844F006173F1 /* MessageTests.swift */,
+				6B8F26D61B647D40005032CE /* FrameTests.pb.swift */,
 			);
 			path = StructBufTests;
 			sourceTree = "<group>";
@@ -146,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				6BC3A5CA1B2BF9E4007E988A /* descriptor.proto */,
-				7D596B241B2B54650063E694 /* Frame.pb.swift */,
 				6BC3A5CB1B2BFA29007E988A /* Descriptor.pb.swift */,
 			);
 			name = protos;
@@ -291,6 +302,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B8F26D71B647D40005032CE /* FrameTests.pb.swift in Sources */,
+				6B8F26D81B647E6E005032CE /* Frame.pb.swift in Sources */,
 				7D596B001B2A03FB0063E694 /* StructBufTests.swift in Sources */,
 				7D70C8291B2B844F006173F1 /* MessageTests.swift in Sources */,
 				7D596B1A1B2A33310063E694 /* VarintTests.swift in Sources */,
@@ -302,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D596B231B2B38120063E694 /* StructBuf.swift in Sources */,
-				7D596B251B2B54650063E694 /* Frame.pb.swift in Sources */,
 				7D596B111B2A271C0063E694 /* main.swift in Sources */,
 				6BC3A5CC1B2BFA29007E988A /* Descriptor.pb.swift in Sources */,
 				7D596B221B2B37BB0063E694 /* Message.swift in Sources */,

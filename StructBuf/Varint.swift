@@ -30,11 +30,6 @@ public struct Varint {
         self.init(uint64: UInt64(uint32))
     }
 
-    public init(value: Int) throws {
-        guard value >= 0 else { throw StructBufError.NotImplemented }
-        self.init(uint64: UInt64(value))
-    }
-
     init(tag: Int, type: WireType) {
         self.init(uint64: UInt64(tag) << 3 | UInt64(type.rawValue))
     }
@@ -43,8 +38,8 @@ public struct Varint {
         self.bytes = bytes
     }
 
-    init(value: Bool) {
-        self.bytes = value ? [1] : [0]
+    public init(bool: Bool) {
+        self.bytes = bool ? [1] : [0]
     }
 
     // if successful, returns a tuple of a new Varint followed by

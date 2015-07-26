@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import StructBuf
 
 struct Frame: Message {
 
-    var size: UInt32
+    var size: UInt32 = 0
 
-    var bytes: [UInt8]
-    var serializedSize: Int
-    var unknownFields: [Int:[WireValue]]
-    init?(bytes: [UInt8]) {
-        return nil
+    var bytes: [UInt8] = []
+    var serializedSize: Int { return bytes.count }
+    var unknownFields: [Int:[WireValue]] = [:]
+    init(bytes: [UInt8]) throws {
+        size = 1
     }
 }

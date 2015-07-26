@@ -89,7 +89,7 @@ class WireValueTests: XCTestCase {
     }
 
     func testVarintFromNumericValue() {
-        let varint = try! Varint(value: 150)
+        let varint = Varint(uint32: 150)
         XCTAssertEqual(varint.bytes.count, 2)
         XCTAssertEqual(varint.bytes, [0x96, 0x01])
         XCTAssertEqual(varint.asUInt64(), UInt64(150))

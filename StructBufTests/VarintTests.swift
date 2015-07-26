@@ -42,17 +42,6 @@ class VarintTests: XCTestCase {
         XCTAssertGreaterThan(varint.bytes.count, 0)
     }
 
-    func testInitInt() {
-        do {
-            let number: Int = 1
-            let varint = try Varint(value: number)
-
-            XCTAssertGreaterThan(varint.bytes.count, 0)
-        } catch {
-            XCTFail("should not have thrown error")
-        }
-    }
-
 //    func testInitIntNegativeNumber() {
 //        let number: Int = -4
 //        do {
@@ -115,18 +104,24 @@ class VarintTests: XCTestCase {
         XCTFail("should have thrown error")
     }
 
+    func testBool() {
+        let varint = Varint(bool: true)
+        XCTAssertEqual(varint.bytes, [1])
+    }
+
+    func testFalseBool() {
+        let varint = Varint(bool: false)
+        XCTAssertEqual(varint.bytes, [0])
+    }
+
     func testAsBool() {
-        do {
-            let varint = try Varint(value: 40)
-            XCTAssertTrue(varint.as_bool())
-        } catch {
-            XCTFail("should not have thrown")
-        }
+        let varint = Varint(uint32: 40)
+        XCTAssertTrue(varint.as_bool())
     }
 
 
     func testAsInt() {
-        let varint = try! Varint(value: 4)
+        let varint = Varint(uint32: 4)
         let value = try! varint.asInt()
         XCTAssertEqual(4, value)
     }
