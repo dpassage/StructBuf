@@ -146,3 +146,11 @@ public struct Field {
         }
     }
 }
+
+public struct FieldGenerator: GeneratorType {
+    public typealias Element = Field
+
+    public func next() -> FieldGenerator.Element? {
+        return nil
+    }
+}

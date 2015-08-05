@@ -362,7 +362,7 @@ struct PhoneNumber: Message {
         }
     }
 
-    init?([UInt8]) { return nil }
+    init?(_: [UInt8]) { return nil }
     init(number: String, type: PhoneType = .Home, unknownFields: [Int:[WireValue]] = [:]) {
         self.number = number
         self.type = type
