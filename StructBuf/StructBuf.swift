@@ -73,7 +73,7 @@ extension WireValue {
                 ]
             case let .Bytes(value):
                 var bytes = Varint(uint64: UInt64(value.count)).bytes
-                bytes.extend(value)
+                bytes.appendContentsOf(value)
                 return bytes
             case .StartGroup:
                 fallthrough

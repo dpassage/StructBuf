@@ -15,11 +15,17 @@ internal class NMBWait: NSObject {
             }
             return completed
         }
-        if result == PollResult.Failure {
+        switch (result) {
+        case .Failure:
             let pluralize = (timeout == 1 ? "" : "s")
             fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
-        } else if result == PollResult.Timeout {
+        case .Timeout:
             fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
+        case let .ErrorThrown(error):
+            // Technically, we can never reach this via a public API call
+            fail("Unexpected error thrown: \(error)", file: file, line: line)
+        case .Success:
+            break
         }
     }
 
@@ -32,13 +38,15 @@ internal class NMBWait: NSObject {
 /// Wait asynchronously until the done closure is called.
 ///
 /// This will advance the run loop.
-public func waitUntil(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
-    NMBWait.until(timeout: timeout, file: file, line: line, action: action)
+public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: ((Any?...) -> Void) -> Void) -> Void {
+    NMBWait.until(timeout: timeout, file: file, line: line, action: bridgeToVoidAction(action))
 }
 
-/// Wait asynchronously until the done closure is called.
-///
-/// This will advance the run loop.
-public func waitUntil(file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
-    NMBWait.until(timeout: 1, file: file, line: line, action: action)
+/// This bridging function should not be required in Swift 2.1 as it supports function covariance
+private func bridgeToVoidAction(vargAction: ((Any?...) -> Void) -> Void) -> ((() -> Void) -> Void) {
+    return { voidDone in
+        vargAction() { _ in
+            voidDone()
+        }
+    }
 }

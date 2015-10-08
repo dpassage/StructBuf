@@ -1,10 +1,10 @@
 use_frameworks!
 
 def testing_pods
-    pod 'Quick', :git => 'https://github.com/Quick/Quick', :branch => 'swift-2.0'
-    pod 'Nimble', :git => 'https://github.com/Quick/Nimble.git', :branch => 'swift-2.0'
+  pod 'Quick', '~> 0.6'
+  pod 'Nimble', '~> 2.0'
 end
 
 target 'StructBufTests' do
-    testing_pods
+  testing_pods
 end
