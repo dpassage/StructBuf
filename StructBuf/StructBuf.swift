@@ -92,7 +92,7 @@ extension WireValue {
 }
 
 extension WireValue: Equatable {}
-public func ==(left: WireValue, right: WireValue) -> Bool {
+public func == (left: WireValue, right: WireValue) -> Bool {
     switch (left, right) {
     case (.Fixed32(let leftValue), .Fixed32(let rightValue)):
         return leftValue == rightValue
@@ -133,7 +133,8 @@ public struct Field {
             let valueBytes = [UInt8](bytes[totalBytesRead..<bytes.count])
             let (varintValue, varintBytes) = try Varint.fromBytes(valueBytes)
             totalBytesRead += varintBytes
-            return (Field(number: tag, value: WireValue.VarintEncoded(varintValue.asUInt64())), totalBytesRead)
+            return (Field(number: tag, value: WireValue.VarintEncoded(varintValue.asUInt64())),
+                totalBytesRead)
         case .Fixed32:
             var value: UInt32 = 0
             guard bytes.count >= totalBytesRead + 4 else { throw StructBufError.ParseFailed }

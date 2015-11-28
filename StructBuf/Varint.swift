@@ -14,12 +14,12 @@ public struct Varint {
     public init(uint64: UInt64) {
         var _bytes: [UInt8] = []
         var _value = uint64
-        while (true) {
-            if ((_value & ~0x7F) == 0) {
+        while true {
+            if (_value & ~0x7F) == 0 {
                 _bytes.append(UInt8(_value))
                 break
             } else {
-                _bytes.append(UInt8((_value & 0x7F) | 0x80));
+                _bytes.append(UInt8((_value & 0x7F) | 0x80))
                 _value = _value >> 7
             }
         }
@@ -68,7 +68,7 @@ public struct Varint {
 
     public func asInt() throws -> Int {
         let value = asUInt64()
-        if (value > UInt64(Int.max)) {
+        if value > UInt64(Int.max) {
             throw StructBufError.OutOfRange
         }
         return Int(value)

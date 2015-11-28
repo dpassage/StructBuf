@@ -215,6 +215,7 @@
 				7D596AEC1B2A03FB0063E694 /* Frameworks */,
 				7D596AED1B2A03FB0063E694 /* Headers */,
 				7D596AEE1B2A03FB0063E694 /* Resources */,
+				6BDF5D931C09754E0075A746 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -335,6 +336,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StructBufTests/Pods-StructBufTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6BDF5D931C09754E0075A746 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		7DB4E27A4A043A2E2F229F04 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
