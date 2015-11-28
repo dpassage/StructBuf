@@ -2,4 +2,4 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'cocoapods', '0.39.0.rc.1'
+gem 'cocoapods', '0.39.0'
